@@ -18,6 +18,6 @@ spring:
       type: com.zaxxer.hikari.HikariDataSource
       jdbcUrl: jdbc:mysql://localhost:3306/reservations2
       username: root
-      password: root
+      password: 2002
       hikari:
          poolName: pool

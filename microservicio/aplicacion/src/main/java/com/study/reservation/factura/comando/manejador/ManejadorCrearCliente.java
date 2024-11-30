@@ -6,7 +6,9 @@ import com.study.reservation.cliente.servicio.ServicioCliente;
 import com.study.reservation.factura.comando.ComandoCrearCliente;
 import com.study.reservation.factura.comando.fabrica.FabricaCrearCliente;
 import com.study.reservation.manejador.ManejadorComandoRespuesta;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ManejadorCrearCliente implements ManejadorComandoRespuesta<ComandoCrearCliente, ComandoRespuesta<Long>> {
     private final FabricaCrearCliente fabricaCrearCliente;
     private final ServicioCliente servicioCliente;

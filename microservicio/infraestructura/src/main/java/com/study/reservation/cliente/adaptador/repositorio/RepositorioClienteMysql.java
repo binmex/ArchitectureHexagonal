@@ -1,6 +1,7 @@
 package com.study.reservation.cliente.adaptador.repositorio;
 
 import com.study.reservation.cliente.entidad.Cliente;
+import com.study.reservation.cliente.entidad.ClienteActualizarDTO;
 import com.study.reservation.cliente.puerto.RepositorioCliente;
 import com.study.reservation.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.study.reservation.infraestructura.jdbc.EjecucionBaseDeDatos;
@@ -52,5 +53,26 @@ public class RepositorioClienteMysql implements RepositorioCliente {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sql, paramSource, keyHolder, new String[]{"id"});
         return keyHolder.getKey().longValue();
+    }
+
+    @Override
+    public void actualizarCliente(Long id, ClienteActualizarDTO cliente) {
+        String sql = "UPDATE Cliente SET nombre = :nombre, apellido = :apellido, correo_electronico = :correo, telefono = :telefono, direccion = :direccion WHERE ID_cliente = :id";
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        paramSource.addValue("nombre", cliente.nombre());
+        paramSource.addValue("apellido", cliente.apellido());
+        paramSource.addValue("correo", cliente.correo());
+        paramSource.addValue("telefono", cliente.telefono());
+        paramSource.addValue("direccion", cliente.direccion());
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sql, paramSource);
+    }
+
+    @Override
+    public void eliminarCliente(Long id) {
+        String sql = "DELETE FROM Cliente WHERE ID_cliente = :id";
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sql, paramSource);
     }
 }
